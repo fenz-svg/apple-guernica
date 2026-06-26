@@ -63,13 +63,27 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   object-position: 70% center;
 }
 
-/* Overlay ligero para legibilidad del texto */
+/* Overlay para legibilidad del texto — contraste óptimo */
 .video-bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.50);
   z-index: 1;
+}
+
+/* Gradiente oscuro lateral-izquierdo extra para el texto del hero */
+.video-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(0,0,0,0.60) 0%,
+    rgba(0,0,0,0.30) 55%,
+    rgba(0,0,0,0) 100%
+  );
+  z-index: 2;
 }
 
 /* Color grade sutil */
@@ -172,10 +186,11 @@ nav {
   gap: .9rem;
 }
 
+/* ── Botones unificados: border-radius 12px en todos ── */
 .btn-nav-ghost {
   padding: .48rem 1.1rem;
   border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: .73rem;
   font-weight: 500;
   color: var(--silver);
@@ -190,7 +205,7 @@ nav {
 .btn-nav-solid {
   padding: .5rem 1.2rem;
   background: linear-gradient(135deg, var(--blue) 0%, var(--violet) 100%);
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: .73rem;
   font-weight: 600;
   color: #fff;
@@ -206,7 +221,7 @@ nav {
   gap: .5rem;
   padding: .5rem 1.2rem;
   background: #25d366;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: .73rem;
   font-weight: 600;
   color: #fff;
@@ -580,10 +595,184 @@ nav {
 }
 @media (max-width: 480px) {
   .headline { font-size: clamp(2.4rem, 11vw, 3.2rem); }
-  .stats { gap: 1.2rem; }
+  /* ── Stats: grid 2 columnas en móvil ── */
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 2rem;
+    width: 100%;
+    max-width: 260px;
+  }
   .stat-sep { display: none; }
+  .stat-item:nth-child(5) { grid-column: 1 / -1; }
   .btn-primary, .btn-secondary { padding: .8rem 1.4rem; font-size: .82rem; }
-  .hero { padding: 68px 1.2rem 2rem; }
+  .hero { padding: 68px 1.4rem 2rem; }
+}
+
+/* ═══════════════════════════════════════════
+   OFFERS SECTION
+═══════════════════════════════════════════ */
+.offers-section {
+  position: relative;
+  z-index: 10;
+  padding: 5rem clamp(1.4rem, 5vw, 4.5rem) 5rem;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(6,6,15,0.98) 8%);
+}
+
+.offers-label {
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: .7rem;
+}
+
+.offers-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  color: var(--white);
+  margin-bottom: 2.5rem;
+}
+.offers-title span {
+  background: linear-gradient(100deg, #60a5fa 0%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  max-width: 1100px;
+}
+
+/* Card base */
+.offer-card {
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 1.8rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  transition: border-color .25s, transform .25s, background .25s;
+  position: relative;
+  overflow: hidden;
+}
+.offer-card:hover {
+  border-color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  transform: translateY(-4px);
+}
+
+/* Featured card */
+.offer-card-featured {
+  background: linear-gradient(145deg, rgba(37,99,235,0.12) 0%, rgba(79,70,229,0.10) 100%);
+  border-color: rgba(99,102,241,0.3);
+  box-shadow: 0 0 40px rgba(99,102,241,0.12);
+}
+.offer-card-featured:hover {
+  border-color: rgba(99,102,241,0.5);
+}
+
+.offer-badge {
+  display: inline-block;
+  padding: .25rem .7rem;
+  border-radius: 99px;
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--silver);
+  width: fit-content;
+  margin-bottom: .6rem;
+}
+.offer-badge-primary {
+  background: rgba(99,102,241,0.2);
+  border-color: rgba(99,102,241,0.4);
+  color: #a5b4fc;
+}
+
+.offer-icon {
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: .4rem;
+}
+
+.offer-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -.01em;
+}
+
+.offer-price {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -.03em;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.offer-sub {
+  font-size: .72rem;
+  color: var(--muted);
+  letter-spacing: .02em;
+  margin-bottom: .8rem;
+}
+
+.offer-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+  margin: .4rem 0;
+}
+
+.offer-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  padding: .7rem 1.4rem;
+  border-radius: 12px;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--silver);
+  transition: border-color .2s, color .2s, background .2s, transform .2s;
+}
+.offer-btn:hover {
+  border-color: rgba(255,255,255,0.28);
+  color: var(--white);
+  background: rgba(255,255,255,0.05);
+  transform: translateY(-1px);
+}
+.offer-btn-primary {
+  background: linear-gradient(135deg, var(--blue), var(--violet));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(99,102,241,0.3);
+}
+.offer-btn-primary:hover {
+  opacity: .88;
+  background: linear-gradient(135deg, var(--blue), var(--violet));
+  border-color: transparent;
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .offers-grid { grid-template-columns: 1fr 1fr; }
+  .offer-card-featured { grid-column: 1 / -1; }
+}
+@media (max-width: 540px) {
+  .offers-grid { grid-template-columns: 1fr; }
+  .offer-card-featured { grid-column: auto; }
+  .offers-section { padding: 3rem 1.4rem 3rem; }
 }
 </style>
 </head>
@@ -879,110 +1068,4 @@ nav {
           <text x="183" y="360" fill="#fff" font-size="22" font-family="sans-serif">🎁</text>
           <text x="246" y="360" fill="#fff" font-size="22" font-family="sans-serif">⚙️</text>
           <text x="55"  y="388" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Inter,sans-serif">Envíos</text>
-          <text x="115" y="388" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Inter,sans-serif">Cuotas</text>
-          <text x="178" y="388" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Inter,sans-serif">Regalos</text>
-          <text x="242" y="388" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Inter,sans-serif">Ajustes</text>
-
-          <!-- ── BOTTOM WIDGET ── -->
-          <rect x="44" y="410" width="232" height="72" rx="18" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-          <!-- Music-like bar inside widget -->
-          <rect x="56" y="425" width="36" height="36" rx="9" fill="url(#uiGrad1)"/>
-          <text x="62" y="449" fill="#fff" font-size="20" font-family="sans-serif">🎵</text>
-          <text x="102" y="437" fill="#fff" font-size="11" font-weight="600" font-family="Inter,sans-serif">Oferta del día</text>
-          <text x="102" y="452" fill="rgba(255,255,255,0.5)" font-size="10" font-family="Inter,sans-serif">AirPods Pro — $199</text>
-          <!-- Progress bar -->
-          <rect x="102" y="460" width="138" height="3" rx="1.5" fill="rgba(255,255,255,0.1)"/>
-          <rect x="102" y="460" width="88"  height="3" rx="1.5" fill="url(#uiGrad1)"/>
-
-          <!-- ── HOME INDICATOR ── -->
-          <rect x="118" y="494" width="84" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
-
-        </g>
-
-        <!-- ── DYNAMIC ISLAND ── -->
-        <rect x="114" y="28" width="92" height="28" rx="14" fill="#000"/>
-        <!-- Front camera dot -->
-        <circle cx="186" cy="42" r="5" fill="#0d0f1a"/>
-        <circle cx="186" cy="42" r="3" fill="#080a10"/>
-
-        <!-- ── FRAME BORDER (titanium) ── -->
-        <rect x="18" y="12" width="284" height="616" rx="46" fill="none" stroke="url(#frmG)" stroke-width="2.5"/>
-
-        <!-- ── SIDE BUTTONS (titanium) ── -->
-        <!-- Power (right) -->
-        <rect x="302" y="168" width="7" height="65" rx="3.5" fill="url(#frmG)"/>
-        <!-- Volume up (left) -->
-        <rect x="11"  y="148" width="7" height="45" rx="3.5" fill="url(#frmG)"/>
-        <!-- Volume down (left) -->
-        <rect x="11"  y="200" width="7" height="45" rx="3.5" fill="url(#frmG)"/>
-        <!-- Action button (left) -->
-        <rect x="11"  y="132" width="7" height="28" rx="3.5" fill="url(#frmG)"/>
-
-        <!-- Screen top reflection -->
-        <rect x="32" y="56" width="256" height="48" rx="30" fill="rgba(255,255,255,0.025)" clip-path="url(#displayClip)"/>
-
-      </svg>
-
-      <!-- Floating card 2 -->
-      <div class="card-float card-float-2">
-        <div class="cf-label">Oferta especial</div>
-        <div class="cf-value">
-          12 cuotas sin interés
-          <span class="cf-badge">HOY</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- SCROLL HINT -->
-  <div class="scroll-hint">
-    <div class="mouse"><div class="wheel"></div></div>
-    Scroll
-  </div>
-
-</section>
-
-<script>
-/* Ham toggle */
-document.querySelector('.ham').addEventListener('click', function(){
-  this.classList.toggle('open');
-});
-
-/* ── Video background handling ── */
-const vid = document.getElementById('bgVideo');
-
-// Fallback: only show gradient if video genuinely fails to load
-const vidSource = vid.querySelector('source');
-if (vidSource) {
-  vidSource.addEventListener('error', () => {
-    document.querySelector('.video-bg').style.background =
-      'radial-gradient(ellipse 80% 70% at 70% 45%, rgba(79,70,229,0.22) 0%, transparent 60%),' +
-      'radial-gradient(ellipse 60% 60% at 20% 60%, rgba(37,99,235,0.16) 0%, transparent 55%),' +
-      'linear-gradient(160deg, #000000 0%, #06060f 100%)';
-  });
-}
-
-// Autoplay is handled by the attribute; just mute and play silently
-vid.muted = true;
-vid.play().catch(() => { /* autoplay policy — video will play on first interaction */ });
-
-/* Parallax subtle on mouse move */
-document.addEventListener('mousemove', e => {
-  const x = (e.clientX / window.innerWidth  - 0.5) * 2;
-  const y = (e.clientY / window.innerHeight - 0.5) * 2;
-  const scene = document.querySelector('.phone-scene');
-  if(scene) {
-    scene.style.transform = `
-      perspective(1200px)
-      rotateY(${x * 4}deg)
-      rotateX(${-y * 3}deg)
-      translateZ(0)
-    `;
-    scene.style.transition = 'transform .12s ease-out';
-  }
-  const blobs = document.querySelectorAll('.blob');
-  blobs.forEach((b, i) => {
-    const factor = (i + 1) * 8;
-    b.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
-    b.style.transition = 'transform .6s ease-out
+          <text x="115" y="388" fill="rgb
