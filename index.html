@@ -1068,4 +1068,92 @@ nav {
           <text x="183" y="360" fill="#fff" font-size="22" font-family="sans-serif">🎁</text>
           <text x="246" y="360" fill="#fff" font-size="22" font-family="sans-serif">⚙️</text>
           <text x="55"  y="388" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Inter,sans-serif">Envíos</text>
-          <text x="115" y="388" fill="rgb
+                    <text x="115" y="388" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Inter,sans-serif">Cuotas</text>
+          <text x="178" y="388" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Inter,sans-serif">Regalos</text>
+          <text x="242" y="388" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Inter,sans-serif">Ajustes</text>
+          <rect x="44" y="410" width="232" height="72" rx="18" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+          <rect x="56" y="425" width="36" height="36" rx="9" fill="url(#uiGrad1)"/>
+          <text x="62" y="449" fill="#fff" font-size="20" font-family="sans-serif">🎵</text>
+          <text x="102" y="437" fill="#fff" font-size="11" font-weight="600" font-family="Inter,sans-serif">Oferta del día</text>
+          <text x="102" y="452" fill="rgba(255,255,255,0.5)" font-size="10" font-family="Inter,sans-serif">AirPods Pro — $199</text>
+          <rect x="102" y="460" width="138" height="3" rx="1.5" fill="rgba(255,255,255,0.1)"/>
+          <rect x="102" y="460" width="88"  height="3" rx="1.5" fill="url(#uiGrad1)"/>
+          <rect x="118" y="494" width="84" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+        </g>
+        <rect x="114" y="28" width="92" height="28" rx="14" fill="#000"/>
+        <circle cx="186" cy="42" r="5" fill="#0d0f1a"/>
+        <circle cx="186" cy="42" r="3" fill="#080a10"/>
+        <rect x="18" y="12" width="284" height="616" rx="46" fill="none" stroke="url(#frmG)" stroke-width="2.5"/>
+        <rect x="302" y="168" width="7" height="65" rx="3.5" fill="url(#frmG)"/>
+        <rect x="11"  y="148" width="7" height="45" rx="3.5" fill="url(#frmG)"/>
+        <rect x="11"  y="200" width="7" height="45" rx="3.5" fill="url(#frmG)"/>
+        <rect x="11"  y="132" width="7" height="28" rx="3.5" fill="url(#frmG)"/>
+        <rect x="32" y="56" width="256" height="48" rx="30" fill="rgba(255,255,255,0.025)" clip-path="url(#displayClip)"/>
+      </svg>
+      <div class="card-float card-float-2">
+        <div class="cf-label">Oferta especial</div>
+        <div class="cf-value">12 cuotas sin interés<span class="cf-badge">HOY</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="offers-section">
+  <div class="offers-label">Destacados</div>
+  <h2 class="offers-title">Lo que más <span>te conviene</span></h2>
+  <div class="offers-grid">
+    <div class="offer-card">
+      <div class="offer-badge">Oferta del día</div>
+      <div class="offer-icon">🎧</div>
+      <div class="offer-name">AirPods Pro (2ª gen)</div>
+      <div class="offer-price">$199 USD</div>
+      <div class="offer-sub">Cancelación activa de ruido · Chip H2</div>
+      <div class="offer-divider"></div>
+      <a class="offer-btn" href="https://wa.me/5491100000000" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+    </div>
+    <div class="offer-card offer-card-featured">
+      <div class="offer-badge offer-badge-primary">⭐ Más vendido</div>
+      <div class="offer-icon">📱</div>
+      <div class="offer-name">iPhone 16 Pro Max</div>
+      <div class="offer-price">desde $1,199 USD</div>
+      <div class="offer-sub">Plan canje disponible · Garantía oficial</div>
+      <div class="offer-divider"></div>
+      <a class="offer-btn offer-btn-primary" href="https://wa.me/5491100000000" target="_blank" rel="noopener">Ver modelos disponibles</a>
+    </div>
+    <div class="offer-card">
+      <div class="offer-badge">Financiación</div>
+      <div class="offer-icon">💳</div>
+      <div class="offer-name">Hasta 12 cuotas</div>
+      <div class="offer-price">Sin interés</div>
+      <div class="offer-sub">Todas las tarjetas · Débito y crédito</div>
+      <div class="offer-divider"></div>
+      <a class="offer-btn" href="https://wa.me/5491100000000" target="_blank" rel="noopener">Consultar planes de pago</a>
+    </div>
+  </div>
+</section>
+
+<script>
+document.querySelector('.ham').addEventListener('click', function(){ this.classList.toggle('open'); });
+const vid = document.getElementById('bgVideo');
+const vidSource = vid.querySelector('source');
+if (vidSource) {
+  vidSource.addEventListener('error', () => {
+    document.querySelector('.video-bg').style.background =
+      'radial-gradient(ellipse 80% 70% at 70% 45%, rgba(79,70,229,0.22) 0%, transparent 60%),' +
+      'linear-gradient(160deg, #000000 0%, #06060f 100%)';
+  });
+}
+vid.muted = true;
+vid.play().catch(() => {});
+document.addEventListener('mousemove', e => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 2;
+  const y = (e.clientY / window.innerHeight - 0.5) * 2;
+  const scene = document.querySelector('.phone-scene');
+  if(scene) {
+    scene.style.transform = 'perspective(1200px) rotateY(' + (x*4) + 'deg) rotateX(' + (-y*3) + 'deg)';
+    scene.style.transition = 'transform .12s ease-out';
+  }
+});
+</script>
+</body>
+</html>
